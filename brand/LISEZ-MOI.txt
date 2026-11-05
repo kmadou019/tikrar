@@ -1,0 +1,32 @@
+Tikrar : fichiers du logo et de l'icône
+=======================================
+
+Couleurs
+  Vert (clair)   #3B6852      Vert (sombre)  #8DBDA2
+  Crème          #F5F2EA      Fond sombre    #101412
+  Texte clair    #1F2A25      Texte sombre   #E8E6DF
+
+Monogramme تك et mot تكرار : calligraphie ruqʿa, police Aref Ruqaa Bold (licence SIL OFL).
+« Tikrar » en IBM Plex Sans SemiBold (licence SIL OFL). Tout est converti en tracés : aucune police à installer.
+
+png/
+  tikrar-icon-1024.png                 icône complète, fond vert
+  tikrar-icon-512-play-store.png       à téléverser dans la fiche Play Store (512 x 512)
+  tikrar-icon-foreground-1024.png      calque avant, fond transparent (Expo, Flutter, Capacitor)
+  tikrar-icon-monochrome-1024.png      version monochrome, fond transparent
+  tikrar-lockup-*.png, tikrar-wordmark-*.png   aperçus des variantes avec le mot
+
+svg/
+  tikrar-icon.svg, tikrar-icon-foreground.svg, tikrar-icon-background.svg, tikrar-icon-monochrome.svg
+  tikrar-lockup-horizontal-light/dark.svg   monogramme + Tikrar + تكرار
+  tikrar-wordmark-light/dark.svg            Tikrar au-dessus de تكرار (sans monogramme), fond transparent
+
+android/res/                           à copier dans app/src/main/res/
+  mipmap-anydpi-v26/ic_launcher.xml (+ _round)   icône adaptative (avant, arrière, monochrome)
+  drawable/ic_launcher_foreground.xml, ic_launcher_monochrome.xml
+  values/ic_launcher_background.xml
+  mipmap-*dpi/ic_launcher.png (+ _round)          icônes héritées, Android 7 et moins
+
+Expo (app.json) : adaptiveIcon.foregroundImage = png/tikrar-icon-foreground-1024.png,
+  adaptiveIcon.backgroundColor = "#3B6852", adaptiveIcon.monochromeImage = png/tikrar-icon-monochrome-1024.png,
+  icon = png/tikrar-icon-1024.png
