@@ -3,6 +3,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Corpus } from "../data/corpora";
 import { isRemote } from "../lib/remoteCache";
 import { Chapter, est, totalDuration } from "../data/chapters";
+import { verseStarts } from "../data/verses";
 import { Theme, ThemeName } from "../theme";
 import { clamp, usePrefs } from "../hooks/usePrefs";
 import { usePlayback } from "../hooks/usePlayback";
@@ -147,7 +148,7 @@ export function CorpusScreen({ t, theme, corpus, speed, onCycleSpeed, onToggleTh
               onInc={() => setRep(item.n, repsOf(item.n) + 1)}
               onSet={(n) => setRep(item.n, n)}
               onPlay={() => pb.playOne(item.n)}
-              onOpen={() => onOpenChapter(item)}
+              onOpen={verseStarts(corpus.id, item.n) ? () => onOpenChapter(item) : undefined}
             />
           );
         }}

@@ -1,0 +1,36 @@
+import { hostedAudio } from "./audioHost";
+import type { Chapter } from "./chapters";
+
+// Chapitres : Al-ʿAqīda aṭ-Ṭaḥāwiyya : 30 chapitres, d'après les sections de Wikisource.
+export const TAHAWIYYA_CHAPTERS: Chapter[] = [
+  { n: 1, ar: "المقدمة", fr: "Introduction", dur: 39, ...hostedAudio("tahawiyya-01.mp3") },
+  { n: 2, ar: "الإيمان بالله تعالى", fr: "La foi en Dieu (tawḥīd)", dur: 187, ...hostedAudio("tahawiyya-02.mp3") },
+  { n: 3, ar: "الإيمان بنبوة النبي محمد صلى الله عليه وسلم", fr: "La foi en la prophétie de Muḥammad ﷺ", dur: 26, ...hostedAudio("tahawiyya-03.mp3") },
+  { n: 4, ar: "الإيمان بالقرآن الكريم", fr: "La foi dans le Coran", dur: 53, ...hostedAudio("tahawiyya-04.mp3") },
+  { n: 5, ar: "كفر من قال بالتشبيه", fr: "Mécréance de qui assimile Dieu à ses créatures", dur: 18, ...hostedAudio("tahawiyya-05.mp3") },
+  { n: 6, ar: "رؤية الله حق", fr: "La vision de Dieu est une vérité", dur: 141, ...hostedAudio("tahawiyya-06.mp3") },
+  { n: 7, ar: "الإيمان بالإسراء والمعراج", fr: "L’Isrāʾ et le Miʿrāj", dur: 23, ...hostedAudio("tahawiyya-07.mp3") },
+  { n: 8, ar: "الإيمان بالحوض والشفاعة والميثاق", fr: "Le Bassin, l’intercession et le pacte", dur: 23, ...hostedAudio("tahawiyya-08.mp3") },
+  { n: 9, ar: "الإيمان بعلم الله والأعمال بالخواتيم", fr: "La science de Dieu et les actes jugés à leur fin", dur: 34, ...hostedAudio("tahawiyya-09.mp3") },
+  { n: 10, ar: "الإيمان بالقضاء والقدر", fr: "La foi au décret et au destin", dur: 208, ...hostedAudio("tahawiyya-10.mp3") },
+  { n: 11, ar: "الإيمان بالعرش والكرسي", fr: "Le Trône et le Piédestal", dur: 20, ...hostedAudio("tahawiyya-11.mp3") },
+  { n: 12, ar: "الإيمان بالملائكة والنبيين والكتب السماوية", fr: "Les anges, les prophètes et les Livres", dur: 40, ...hostedAudio("tahawiyya-12.mp3") },
+  { n: 13, ar: "حرمة الخوض في ذات الله والجدال في دين الله وقرآنه", fr: "Interdiction de disputer sur l’essence de Dieu et sur sa religion", dur: 33, ...hostedAudio("tahawiyya-13.mp3") },
+  { n: 14, ar: "الرد على المرجئة", fr: "Réfutation des Murjiʾa", dur: 43, ...hostedAudio("tahawiyya-14.mp3") },
+  { n: 15, ar: "تعريف الإيمان", fr: "Définition de la foi", dur: 70, ...hostedAudio("tahawiyya-15.mp3") },
+  { n: 16, ar: "أهل الكبائر من المؤمنين لا يخلدون في النار", fr: "Les auteurs de grands péchés ne resteront pas éternellement en Enfer", dur: 104, ...hostedAudio("tahawiyya-16.mp3") },
+  { n: 17, ar: "وجوب طاعة الأئمة والولاة", fr: "Obéir aux imams et aux gouvernants", dur: 23, ...hostedAudio("tahawiyya-17.mp3") },
+  { n: 18, ar: "اتباع أهل السنة والجماعة", fr: "Suivre Ahl as-Sunna wa-l-Jamāʿa", dur: 25, ...hostedAudio("tahawiyya-18.mp3") },
+  { n: 19, ar: "وجوب الحج والجهاد إلى يوم القيامة", fr: "Le pèlerinage et le jihad jusqu’au Jour de la Résurrection", dur: 17, ...hostedAudio("tahawiyya-19.mp3") },
+  { n: 20, ar: "الإيمان بالملائكة والبرزخ", fr: "Les anges et le barzakh", dur: 44, ...hostedAudio("tahawiyya-20.mp3") },
+  { n: 21, ar: "الإيمان بيوم القيامة والجنة والنار", fr: "Le Jour de la Résurrection, le Paradis et l’Enfer", dur: 44, ...hostedAudio("tahawiyya-21.mp3") },
+  { n: 22, ar: "أفعال العباد خلق الله وكسب من العباد", fr: "Les actes des serviteurs : créés par Dieu, acquis par eux", dur: 43, ...hostedAudio("tahawiyya-22.mp3") },
+  { n: 23, ar: "التكليف بما يطاق", fr: "L’obligation selon la capacité", dur: 69, ...hostedAudio("tahawiyya-23.mp3") },
+  { n: 24, ar: "الله هو الغني ونحن الفقراء إليه", fr: "Dieu est le Riche, nous sommes les pauvres", dur: 22, ...hostedAudio("tahawiyya-24.mp3") },
+  { n: 25, ar: "حب أصحاب النبي صلى الله عليه وسلم", fr: "L’amour des Compagnons du Prophète ﷺ", dur: 130, ...hostedAudio("tahawiyya-25.mp3") },
+  { n: 26, ar: "الأنبياء أفضل من الأولياء", fr: "Les prophètes sont supérieurs aux saints", dur: 16, ...hostedAudio("tahawiyya-26.mp3") },
+  { n: 27, ar: "الإيمان بأشراط الساعة", fr: "Les signes de l’Heure", dur: 17, ...hostedAudio("tahawiyya-27.mp3") },
+  { n: 28, ar: "لا يجوز تصديق الكهنة والعرافين", fr: "Interdiction de croire les devins et les voyants", dur: 17, ...hostedAudio("tahawiyya-28.mp3") },
+  { n: 29, ar: "إن الدين عند الله الإسلام", fr: "La religion auprès de Dieu est l’Islam", dur: 32, ...hostedAudio("tahawiyya-29.mp3") },
+  { n: 30, ar: "الخاتمة", fr: "Conclusion", dur: 79, ...hostedAudio("tahawiyya-30.mp3") },
+];

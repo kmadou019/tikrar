@@ -1,6 +1,7 @@
 import { ALFIYYA_CHAPTERS } from "./alfiyya";
 import { BAYQUNIYYA_CHAPTERS } from "./bayquniyya";
 import { IBN_ABI_KAFF_CHAPTERS } from "./ibn-abi-kaff";
+import { TAHAWIYYA_CHAPTERS } from "./tahawiyya";
 import { TUHFA_CHAPTERS } from "./tuhfa";
 import { ASHIR_CHAPTERS, Chapter, ChapterGroup } from "./chapters";
 import { MUSHAF_CHAPTERS, MUSHAF_GROUPS } from "./mushaf";
@@ -74,6 +75,16 @@ export const CORPORA: Corpus[] = [
     chapters: IBN_ABI_KAFF_CHAPTERS,
     downloadSize: "≈ 1,5 Mo",
     textNote: "Texte vocalisé lu visuellement sur un PDF, avec une collation seulement partielle : une erreur de vocalisation reste possible.",
+  },
+  {
+    id: "tahawiyya",
+    ar: "العقيدة الطحاوية",
+    fr: "Al-ʿAqīda aṭ-Ṭaḥāwiyya (matn)",
+    kicker: "CROYANCE (ʿAQĪDA)",
+    artist: "Al-ʿAqīda aṭ-Ṭaḥāwiyya · Mishary Rashid Alafasy",
+    description: "Le texte de la croyance de Ahl as-Sunna, en 30 chapitres à écouter un par un",
+    chapters: TAHAWIYYA_CHAPTERS,
+    downloadSize: "≈ 13 Mo",
   },
   {
     id: "mushaf-hadr",

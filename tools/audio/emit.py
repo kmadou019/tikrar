@@ -1,6 +1,8 @@
 """Génère les fichiers de données de l'application à partir de l'alignement.
 
-usage : emit.py --map verse_map.json --texts texts.json --corpus CLE --id ID-DU-TEXTE --label "…" --data-dir tikrar/src/data
+usage : emit.py --chapters-only --chapters-meta chapters_meta.json --const NOM --chapters-file ID.ts --label "…" --data-dir tikrar/src/data
+        (matn en prose : seulement les chapitres, aucun vers ni texte)
+        emit.py --map verse_map.json --texts texts.json --corpus CLE --id ID-DU-TEXTE --label "…" --data-dir tikrar/src/data
               [--chapters-meta chapters_meta.json --const NOM_CONSTANTE --chapters-file bayquniyya.ts]
 
 verse_map.json : {"1": [{"verse": 1, "start": 0.4, "extra": false}, …], …} (début de chaque vers dans son chapitre).
@@ -11,18 +13,7 @@ import argparse
 import json
 
 
-def main():
-    p = argparse.ArgumentParser()
-    p.add_argument("--map", required=True)
-    p.add_argument("--texts", required=True)
-    p.add_argument("--corpus", required=True)
-    p.add_argument("--id", required=True)
-    p.add_argument("--label", required=True)
-    p.add_argument("--data-dir", required=True)
-    p.add_argument("--chapters-meta")
-    p.add_argument("--const")
-    p.add_argument("--chapters-file")
-    a = p.parse_args()
+def emit_verses(a):
     vmap = json.load(open(a.map))
     texts = {v["n"]: v for v in json.load(open(a.texts, encoding="utf-8"))[a.corpus]}
     starts = [f"// {a.label}", "// Début de chaque vers (en secondes) dans l'audio de son chapitre.", "export const STARTS: Record<number, number[]> = {"]
@@ -43,6 +34,23 @@ def main():
     open(f"{a.data_dir}/verses/{a.id}.ts", "w", encoding="utf-8").write("\n".join(starts))
     open(f"{a.data_dir}/verseTexts/{a.id}.ts", "w", encoding="utf-8").write("\n".join(tx))
     print("écrit", f"{a.data_dir}/verses/{a.id}.ts", "et", f"{a.data_dir}/verseTexts/{a.id}.ts")
+
+
+def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("--chapters-only", action="store_true")
+    p.add_argument("--map")
+    p.add_argument("--texts")
+    p.add_argument("--corpus")
+    p.add_argument("--id")
+    p.add_argument("--label", required=True)
+    p.add_argument("--data-dir", required=True)
+    p.add_argument("--chapters-meta")
+    p.add_argument("--const")
+    p.add_argument("--chapters-file")
+    a = p.parse_args()
+    if not a.chapters_only:
+        emit_verses(a)
     if a.chapters_meta:
         meta = json.load(open(a.chapters_meta))
         lines = ['import { hostedAudio } from "./audioHost";', 'import type { Chapter } from "./chapters";', "",

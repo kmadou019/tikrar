@@ -22,6 +22,7 @@ Application Android pour **mémoriser des textes récités en arabe**, en écout
 | *Bayqūniyya* (ʿUmar al-Bayqūnī) | 12 chapitres, ≈ 3 min 30 | Récitation du Dr ʿAbd al-ʿAzīz aṣ-Ṣīnī, découpée par le projet |
 | *Tuḥfat al-aṭfāl* (al-Jamzūrī) | 10 chapitres, ≈ 8 min 30 | Récitation du cheikh Badr at-Turkī, découpée par le projet |
 | *Naẓm Ibn Abī Kaff* (uṣūl al-fiqh malikite) | 3 chapitres, ≈ 3 min | Enregistrement de la chaîne YouTube « عبد الحفيظ جويلي المجبري » (récitant non identifié), découpé par le projet |
+| *al-ʿAqīda aṭ-Ṭaḥāwiyya* (matn en prose) | 30 chapitres, ≈ 27 min | Lecture attribuée à Mishary Rashid Alafasy d'après le titre de la vidéo YouTube (chaîne non indiquée), découpée par le projet ; chapitres d'après les sections de [Wikisource](https://ar.wikisource.org/wiki/%D9%85%D8%AA%D9%86_%D8%A7%D9%84%D8%B9%D9%82%D9%8A%D8%AF%D8%A9_%D8%A7%D9%84%D8%B7%D8%AD%D8%A7%D9%88%D9%8A%D8%A9) (CC BY-SA 4.0). Pas de texte dans l'application |
 | Le Coran | 114 sourates, ≈ 7 h 30 | Hafs ʿan ʿĀṣim (Hadr), cheikh Ahmed Diban, via [way2quran.com](https://way2quran.com/en/reciters/ahmed-diban) |
 
 Les découpages en chapitres d'Ibn ʿĀshir, de l'Alfiyya, de la Bayqūniyya et de la Tuḥfa ont été faits à partir d'une transcription automatique (Whisper), en se calant sur les titres que le récitant annonce à voix haute. Quand un titre n'est pas annoncé, la coupe se fait au premier vers du chapitre.
