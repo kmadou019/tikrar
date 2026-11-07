@@ -11,7 +11,7 @@ import sys
 
 from common import ffmpeg
 
-BASE = ["yt-dlp", "--js-runtimes", "node", "--no-playlist", "--no-warnings"]
+BASE = [sys.executable, "-m", "yt_dlp", "--js-runtimes", "node", "--no-playlist", "--no-warnings"]
 
 
 def run(args):

@@ -21,6 +21,7 @@ Application Android pour **mémoriser des textes récités en arabe**, en écout
 | *Alfiyya d'Ibn Mālik* | 68 chapitres, ≈ 2 h 09 | Récitation de ʿAbd al-Ghanī Ṣādiq al-Faqīh, découpée par le projet |
 | *Bayqūniyya* (ʿUmar al-Bayqūnī) | 12 chapitres, ≈ 3 min 30 | Récitation du Dr ʿAbd al-ʿAzīz aṣ-Ṣīnī, découpée par le projet |
 | *Tuḥfat al-aṭfāl* (al-Jamzūrī) | 10 chapitres, ≈ 8 min 30 | Récitation du cheikh Badr at-Turkī, découpée par le projet |
+| *Naẓm Ibn Abī Kaff* (uṣūl al-fiqh malikite) | 3 chapitres, ≈ 3 min | Enregistrement de la chaîne YouTube « عبد الحفيظ جويلي المجبري » (récitant non identifié), découpé par le projet |
 | Le Coran | 114 sourates, ≈ 7 h 30 | Hafs ʿan ʿĀṣim (Hadr), cheikh Ahmed Diban, via [way2quran.com](https://way2quran.com/en/reciters/ahmed-diban) |
 
 Les découpages en chapitres d'Ibn ʿĀshir, de l'Alfiyya, de la Bayqūniyya et de la Tuḥfa ont été faits à partir d'une transcription automatique (Whisper), en se calant sur les titres que le récitant annonce à voix haute. Quand un titre n'est pas annoncé, la coupe se fait au premier vers du chapitre.
@@ -99,6 +100,7 @@ Le texte des vers vient de quatre fichiers de collation préparés pour le proje
 | Bayqūniyya | 34 | [alukah.net](https://www.alukah.net/hosnihamama/1/118948/) (consonnes), vocalisation collationnée avec [diarfitri88/takhrij-frontend](https://github.com/diarfitri88/takhrij-frontend) | Quelques divergences de vocalisation entre sources, forme la plus répandue retenue. |
 | Tuḥfat al-aṭfāl | 61 | [mushafshamil.com](https://mushafshamil.com/books/tuhfat-al-atfal/) | Nombre de vers conforme à la tradition. |
 | Alfiyya | 1002 | Édition ʿAbd al-Muḥsin al-Qāsim (Médine, 2021), transcription [altwasolbook-hash/alfiya-memorizer](https://github.com/altwasolbook-hash/alfiya-memorizer), contrôlée avec OpenITI et Wikisource | Numérotation de cette édition. |
+| Naẓm Ibn Abī Kaff | 30 | PDF fourni par l'utilisateur (« نسخة مراجعة ومصححة على نسخة الشيخ عليوي »), collation partielle avec [virtualmosque.com](https://virtualmosque.com/?p=3436) | Texte entièrement vocalisé, lu visuellement sur le PDF : une erreur de vocalisation reste possible. |
 | Ibn ʿĀshir | 311 + 5 | [chariaa.weebly.com](https://chariaa.weebly.com/160515781606-157515761606-1593157515881585.html), **source unique** | Vocalisation irrégulière, passages altérés, 311 vers au lieu de 316 ou 317 : les cinq derniers vers (312 à 316) n'ont pas de texte dans l'application. À collationner sur une édition imprimée avant de s'y fier pour mémoriser. |
 
 Les poèmes sont anciens et dans le domaine public ; la vocalisation et la mise en forme viennent des sources ci-dessus. Aucun vers n'a été reconstitué de mémoire.

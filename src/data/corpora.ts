@@ -1,5 +1,6 @@
 import { ALFIYYA_CHAPTERS } from "./alfiyya";
 import { BAYQUNIYYA_CHAPTERS } from "./bayquniyya";
+import { IBN_ABI_KAFF_CHAPTERS } from "./ibn-abi-kaff";
 import { TUHFA_CHAPTERS } from "./tuhfa";
 import { ASHIR_CHAPTERS, Chapter, ChapterGroup } from "./chapters";
 import { MUSHAF_CHAPTERS, MUSHAF_GROUPS } from "./mushaf";
@@ -62,6 +63,17 @@ export const CORPORA: Corpus[] = [
     description: "61 vers sur les règles du tajwīd : nūn et mīm sākin, lām, madd",
     chapters: TUHFA_CHAPTERS,
     downloadSize: "≈ 3,7 Mo",
+  },
+  {
+    id: "ibn-abi-kaff",
+    ar: "نظم ابن أبي كف",
+    fr: "Naẓm Ibn Abī Kaff (uṣūl al-fiqh)",
+    kicker: "FONDEMENTS DU DROIT MALIKITE",
+    artist: "Naẓm Ibn Abī Kaff · chaîne عبد الحفيظ جويلي المجبري",
+    description: "30 vers sur les seize preuves du rite malikite et les cinq règles juridiques majeures",
+    chapters: IBN_ABI_KAFF_CHAPTERS,
+    downloadSize: "≈ 1,5 Mo",
+    textNote: "Texte vocalisé lu visuellement sur un PDF, avec une collation seulement partielle : une erreur de vocalisation reste possible.",
   },
   {
     id: "mushaf-hadr",
