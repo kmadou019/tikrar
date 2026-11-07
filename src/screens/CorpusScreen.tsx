@@ -2,7 +2,7 @@ import { Alert, FlatList, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Corpus } from "../data/corpora";
 import { isRemote } from "../lib/remoteCache";
-import { est, totalDuration } from "../data/chapters";
+import { Chapter, est, totalDuration } from "../data/chapters";
 import { Theme, ThemeName } from "../theme";
 import { clamp, usePrefs } from "../hooks/usePrefs";
 import { usePlayback } from "../hooks/usePlayback";
@@ -25,9 +25,10 @@ type Props = {
   onCycleSpeed: () => void;
   onToggleTheme: () => void;
   onBack: () => void;
+  onOpenChapter: (chapter: Chapter) => void;
 };
 
-export function CorpusScreen({ t, theme, corpus, speed, onCycleSpeed, onToggleTheme, onBack }: Props) {
+export function CorpusScreen({ t, theme, corpus, speed, onCycleSpeed, onToggleTheme, onBack, onOpenChapter }: Props) {
   const insets = useSafeAreaInsets();
   const chapters = corpus.chapters;
   const { prefs, ready, update, repsOf, setRep, setAll, toggle, toggleAll, toggleGroup } = usePrefs(corpus.id, chapters);
@@ -146,6 +147,7 @@ export function CorpusScreen({ t, theme, corpus, speed, onCycleSpeed, onToggleTh
               onInc={() => setRep(item.n, repsOf(item.n) + 1)}
               onSet={(n) => setRep(item.n, n)}
               onPlay={() => pb.playOne(item.n)}
+              onOpen={() => onOpenChapter(item)}
             />
           );
         }}

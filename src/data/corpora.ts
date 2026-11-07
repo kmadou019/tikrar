@@ -1,4 +1,6 @@
 import { ALFIYYA_CHAPTERS } from "./alfiyya";
+import { BAYQUNIYYA_CHAPTERS } from "./bayquniyya";
+import { TUHFA_CHAPTERS } from "./tuhfa";
 import { ASHIR_CHAPTERS, Chapter, ChapterGroup } from "./chapters";
 import { MUSHAF_CHAPTERS, MUSHAF_GROUPS } from "./mushaf";
 
@@ -37,6 +39,26 @@ export const CORPORA: Corpus[] = [
     description: "La synthèse de la grammaire arabe en mille vers",
     chapters: ALFIYYA_CHAPTERS,
     downloadSize: "≈ 60 Mo",
+  },
+  {
+    id: "bayquniyya",
+    ar: "المنظومة البيقونية",
+    fr: "Bayqūniyya (ʿUmar al-Bayqūnī)",
+    kicker: "SCIENCE DU HADITH",
+    artist: "Bayqūniyya · ʿAbd al-ʿAzīz aṣ-Ṣīnī",
+    description: "34 vers sur les types de hadith : authentique, bon, faible et leurs variantes",
+    chapters: BAYQUNIYYA_CHAPTERS,
+    downloadSize: "≈ 1,6 Mo",
+  },
+  {
+    id: "tuhfa",
+    ar: "تحفة الأطفال",
+    fr: "Tuḥfat al-aṭfāl (al-Jamzūrī)",
+    kicker: "TAJWĪD",
+    artist: "Tuḥfat al-aṭfāl · Badr at-Turkī",
+    description: "61 vers sur les règles du tajwīd : nūn et mīm sākin, lām, madd",
+    chapters: TUHFA_CHAPTERS,
+    downloadSize: "≈ 3,7 Mo",
   },
   {
     id: "mushaf-hadr",

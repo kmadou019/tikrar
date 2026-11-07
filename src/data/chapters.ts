@@ -47,6 +47,7 @@ export function fmt(s: number): string {
 }
 
 export function est(s: number): string {
+  if (s < 60) return "≈ " + Math.round(s) + " s";
   const m = Math.round(s / 60);
   if (m < 60) return "≈ " + m + " min";
   return "≈ " + Math.floor(m / 60) + " h " + String(m % 60).padStart(2, "0");

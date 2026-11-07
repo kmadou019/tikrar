@@ -1,6 +1,6 @@
 import Svg, { Circle, Path, Polyline, Rect } from "react-native-svg";
 
-export type IconName = "play" | "pause" | "stop" | "prev" | "next" | "plus" | "minus" | "check" | "moon" | "sun" | "back" | "chevron";
+export type IconName = "play" | "pause" | "stop" | "prev" | "next" | "plus" | "minus" | "check" | "moon" | "sun" | "back" | "chevron" | "jump" | "loop" | "rows" | "download" | "backspace" | "arrow";
 
 type Props = { name: IconName; size: number; color: string; strokeWidth?: number };
 
@@ -32,6 +32,24 @@ export function Icon({ name, size, color, strokeWidth = 2 }: Props) {
       {name === "minus" && <Path d="M6 12h12" {...stroke} />}
       {name === "plus" && <Path d="M6 12h12M12 6v12" {...stroke} />}
       {name === "check" && <Polyline points="5 12.5 10 17.5 19 7" {...stroke} />}
+      {name === "jump" && <Path d="M9 4 7 20M17 4l-2 16M4.5 9h16M3.5 15h16" {...stroke} />}
+      {name === "loop" && (
+        <>
+          <Path d="M17 2.5 20.5 6 17 9.5" {...stroke} />
+          <Path d="M3.5 11.5V10a4 4 0 0 1 4-4h13" {...stroke} />
+          <Path d="M7 21.5 3.5 18 7 14.5" {...stroke} />
+          <Path d="M20.5 12.5V14a4 4 0 0 1-4 4h-13" {...stroke} />
+        </>
+      )}
+      {name === "rows" && <Path d="M4 6h3M4 12h3M4 18h3M11 6h9M11 12h9M11 18h9" {...stroke} />}
+      {name === "download" && <Path d="M12 4v11M7 10.5l5 5 5-5M5 20h14" {...stroke} />}
+      {name === "backspace" && (
+        <>
+          <Path d="M9 5h10.5a1.5 1.5 0 0 1 1.5 1.5v11a1.5 1.5 0 0 1-1.5 1.5H9l-6-7z" {...stroke} strokeWidth={1.9} />
+          <Path d="m12 9.5 5 5M17 9.5l-5 5" {...stroke} strokeWidth={1.9} />
+        </>
+      )}
+      {name === "arrow" && <Path d="M5 12h13M13 7l5 5-5 5" {...stroke} />}
       {name === "back" && <Path d="M15 5l-7 7 7 7" {...stroke} />}
       {name === "chevron" && <Path d="M9 5l7 7-7 7" {...stroke} />}
       {name === "moon" && <Path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" {...stroke} strokeWidth={1.8} />}

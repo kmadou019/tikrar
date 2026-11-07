@@ -18,9 +18,10 @@ type Props = {
   onInc: () => void;
   onSet: (n: number) => void;
   onPlay: () => void;
+  onOpen?: () => void;
 };
 
-export function ChapterRow({ t, chapter, checked, reps, isActive, isPlaying, currentRep, cloud, onToggle, onDec, onInc, onSet, onPlay }: Props) {
+export function ChapterRow({ t, chapter, checked, reps, isActive, isPlaying, currentRep, cloud, onToggle, onDec, onInc, onSet, onPlay, onOpen }: Props) {
   const num = String(chapter.n).padStart(2, "0");
   return (
     <View style={[styles.row, { borderBottomColor: t.line, backgroundColor: isActive ? t.tint : "transparent" }]}>
@@ -40,8 +41,18 @@ export function ChapterRow({ t, chapter, checked, reps, isActive, isPlaying, cur
       </View>
 
       <View style={styles.body}>
-        <Text style={[styles.ar, { color: t.ink }]}>{chapter.ar}</Text>
-        <Text style={[styles.fr, { color: t.muted }]}>{chapter.fr}</Text>
+        <Pressable
+          disabled={!onOpen}
+          accessibilityRole="button"
+          accessibilityLabel={`Voir les vers du chapitre ${chapter.n}`}
+          onPress={onOpen}
+        >
+          <Text style={[styles.ar, { color: t.ink }]}>{chapter.ar}</Text>
+          <View style={styles.frRow}>
+            {onOpen && <Icon name="chevron" size={14} color={t.muted} />}
+            <Text style={[styles.fr, { color: t.muted }]}>{chapter.fr}</Text>
+          </View>
+        </Pressable>
         <View style={styles.controls}>
           {isActive ? (
             <Text style={[styles.status, { color: t.accent }]}>
@@ -85,7 +96,8 @@ const styles = StyleSheet.create({
   num: { fontFamily: FONT.sansSemi, fontSize: 12, fontVariant: ["tabular-nums"] },
   body: { flex: 1, minWidth: 0, paddingTop: 2 },
   ar: { fontFamily: FONT.arabic, fontSize: 24, lineHeight: 37, writingDirection: "rtl", textAlign: "right" },
-  fr: { fontFamily: FONT.sans, fontSize: 13, textAlign: "right" },
+  frRow: { flexDirection: "row", alignItems: "center", justifyContent: "flex-end", columnGap: 6 },
+  fr: { flexShrink: 1, fontFamily: FONT.sans, fontSize: 13, textAlign: "right" },
   controls: { flexDirection: "row", alignItems: "center", columnGap: 8, paddingTop: 4 },
   status: { fontFamily: FONT.sansSemi, fontSize: 12, fontVariant: ["tabular-nums"] },
   dur: { fontFamily: FONT.sans, fontSize: 13, fontVariant: ["tabular-nums"] },

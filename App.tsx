@@ -4,10 +4,12 @@ import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-cont
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import { CORPORA, Corpus } from "./src/data/corpora";
+import type { Chapter } from "./src/data/chapters";
 import { THEMES } from "./src/theme";
 import { useSettings } from "./src/hooks/usePrefs";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { CorpusScreen } from "./src/screens/CorpusScreen";
+import { VerseScreen } from "./src/screens/VerseScreen";
 
 const SPEEDS = [0.75, 1, 1.25, 1.5];
 
@@ -16,19 +18,22 @@ function Main() {
   const scheme = useColorScheme();
   const { settings, ready, update } = useSettings();
   const [corpus, setCorpus] = useState<Corpus | null>(null);
+  const [chapter, setChapter] = useState<Chapter | null>(null);
 
   useEffect(() => {
     if (!corpus) return;
     const sub = BackHandler.addEventListener("hardwareBackPress", () => {
-      setCorpus(null);
+      if (chapter) setChapter(null);
+      else setCorpus(null);
       return true;
     });
     return () => sub.remove();
-  }, [corpus]);
+  }, [corpus, chapter]);
 
   const themeName = settings.theme ?? (scheme === "dark" ? "dark" : "light");
   const t = THEMES[themeName];
   const speed = SPEEDS[settings.speedIdx] ?? 1;
+  const cycleSpeed = () => update({ speedIdx: (settings.speedIdx + 1) % SPEEDS.length });
   const toggleTheme = () => update({ theme: themeName === "dark" ? "light" : "dark" });
 
   if (!ready) return <View style={{ flex: 1, backgroundColor: t.bg }} />;
@@ -36,16 +41,27 @@ function Main() {
   return (
     <View style={[styles.root, { backgroundColor: t.bg, paddingTop: insets.top }]}>
       <StatusBar style={themeName === "dark" ? "light" : "dark"} />
-      {corpus ? (
+      {corpus && chapter ? (
+        <VerseScreen
+          key={`${corpus.id}-${chapter.n}`}
+          t={t}
+          corpus={corpus}
+          chapter={chapter}
+          speed={speed}
+          onCycleSpeed={cycleSpeed}
+          onBack={() => setChapter(null)}
+        />
+      ) : corpus ? (
         <CorpusScreen
           key={corpus.id}
           t={t}
           theme={themeName}
           corpus={corpus}
           speed={speed}
-          onCycleSpeed={() => update({ speedIdx: (settings.speedIdx + 1) % SPEEDS.length })}
+          onCycleSpeed={cycleSpeed}
           onToggleTheme={toggleTheme}
           onBack={() => setCorpus(null)}
+          onOpenChapter={setChapter}
         />
       ) : (
         <HomeScreen t={t} theme={themeName} corpora={CORPORA} onToggleTheme={toggleTheme} onOpen={setCorpus} />
