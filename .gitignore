@@ -43,3 +43,7 @@ yarn-error.*
 # Claude Code : configuration locale ignorée, skills du projet versionnés
 .claude/*
 !.claude/skills/
+
+# Python
+__pycache__/
+*.pyc
