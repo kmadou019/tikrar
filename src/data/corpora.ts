@@ -66,10 +66,10 @@ export const CORPORA: Corpus[] = [
   },
   {
     id: "ibn-abi-kaff",
-    ar: "نظم ابن أبي كف",
-    fr: "Naẓm Ibn Abī Kaff (uṣūl al-fiqh)",
+    ar: "إيصال السالك",
+    fr: "Īṣāl as-sālik (naẓm d’Ibn Abī Kaff)",
     kicker: "FONDEMENTS DU DROIT MALIKITE",
-    artist: "Naẓm Ibn Abī Kaff · chaîne عبد الحفيظ جويلي المجبري",
+    artist: "Īṣāl as-sālik · chaîne عبد الحفيظ جويلي المجبري",
     description: "30 vers sur les seize preuves du rite malikite et les cinq règles juridiques majeures",
     chapters: IBN_ABI_KAFF_CHAPTERS,
     downloadSize: "≈ 1,5 Mo",
