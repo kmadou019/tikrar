@@ -97,7 +97,8 @@ export class VersePlayer {
       const loops = first ? it.loops - cursor.loop : it.loops;
       const offset = first ? cursor.off : 0;
       const media = loops * len - offset;
-      const source = ctx.createBufferSource();
+      // pitchCorrection : à une vitesse autre que 1×, la voix est étirée dans le temps sans changer de hauteur
+      const source = ctx.createBufferSource({ pitchCorrection: true });
       source.buffer = buffer;
       source.loop = true;
       source.loopStart = it.a;

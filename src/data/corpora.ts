@@ -33,7 +33,6 @@ export const CORPORA: Corpus[] = [
     description: "Croyance, purification, prière, zakat, jeûne et pèlerinage",
     chapters: ASHIR_CHAPTERS,
     downloadSize: "≈ 16 Mo",
-    textNote: "Le texte de ce poème provient d’une seule source, non vérifiée sur une édition imprimée : des erreurs sont possibles. Les cinq derniers vers (312 à 316) n’ont pas de texte.",
   },
   {
     id: "alfiyya",
@@ -74,7 +73,6 @@ export const CORPORA: Corpus[] = [
     description: "30 vers sur les seize preuves du rite malikite et les cinq règles juridiques majeures",
     chapters: IBN_ABI_KAFF_CHAPTERS,
     downloadSize: "≈ 1,5 Mo",
-    textNote: "Texte vocalisé lu visuellement sur un PDF, avec une collation seulement partielle : une erreur de vocalisation reste possible.",
   },
   {
     id: "tahawiyya",
