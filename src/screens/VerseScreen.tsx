@@ -188,9 +188,13 @@ export function VerseScreen({ t, corpus, chapter, speed, onCycleSpeed, onBack }:
         )}
       </View>
 
-      {split && !texts && (
+      {split && (!texts || corpus.textNote) && (
         <View style={[styles.banner, { backgroundColor: t.surface, borderColor: t.line }]}>
-          <Text style={[styles.bannerText, { color: t.muted }]}>Le texte des vers n’est pas encore disponible : seuls le numéro et la durée s’affichent. L’écoute fonctionne normalement.</Text>
+          <Text style={[styles.bannerText, { color: t.muted }]}>
+            {!texts
+              ? "Le texte des vers n’est pas encore disponible : seuls le numéro et la durée s’affichent. L’écoute fonctionne normalement."
+              : corpus.textNote}
+          </Text>
         </View>
       )}
 
@@ -213,7 +217,7 @@ export function VerseScreen({ t, corpus, chapter, speed, onCycleSpeed, onBack }:
                 t={t}
                 n={n}
                 dur={fmt(durOf(n))}
-                text={texts?.[n - 1]}
+                text={texts?.[n - 1] && (texts[n - 1][0] || texts[n - 1][1]) ? texts[n - 1] : undefined}
                 inRange={inRange}
                 isEdge={inRange && (n === lo || n === hi)}
                 isFirst={n === lo}

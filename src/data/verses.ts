@@ -1,4 +1,5 @@
 import { STARTS as BAYQUNIYYA } from "./verses/bayquniyya";
+import { STARTS as IBN_ASHIR } from "./verses/ibn-ashir";
 import { STARTS as TUHFA } from "./verses/tuhfa";
 
 // Début de chaque vers dans l'audio de son chapitre, en secondes depuis le début du fichier.
@@ -8,6 +9,7 @@ import { STARTS as TUHFA } from "./verses/tuhfa";
 // Les fichiers de `verses/` sont générés à partir de la transcription de chaque chapitre.
 const STARTS: Record<string, Record<number, number[]>> = {
   bayquniyya: BAYQUNIYYA,
+  "ibn-ashir": IBN_ASHIR,
   tuhfa: TUHFA,
 };
 

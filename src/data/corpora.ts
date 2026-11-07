@@ -17,6 +17,8 @@ export type Corpus = {
   // Poids total des fichiers à télécharger, affiché avant « Tout télécharger ».
   downloadSize?: string;
   unit?: string;
+  // Avertissement affiché au-dessus des vers (par exemple sur la fiabilité du texte).
+  textNote?: string;
 };
 
 export const CORPORA: Corpus[] = [
@@ -29,6 +31,7 @@ export const CORPORA: Corpus[] = [
     description: "Croyance, purification, prière, zakat, jeûne et pèlerinage",
     chapters: ASHIR_CHAPTERS,
     downloadSize: "≈ 16 Mo",
+    textNote: "Le texte de ce poème provient d’une seule source, non vérifiée sur une édition imprimée : des erreurs sont possibles. Les cinq derniers vers (312 à 316) n’ont pas de texte.",
   },
   {
     id: "alfiyya",

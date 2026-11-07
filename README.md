@@ -90,6 +90,19 @@ brand/                       logo, icône et variantes (SVG, PNG)
 - `src/data/verseTexts.ts` : texte des vers, `[premier hémistiche, second hémistiche]` par vers, par texte et par numéro de chapitre. Tant qu'il est vide, l'écran n'affiche que le numéro et la durée de chaque vers.
 - Les repères sont produits à partir de la transcription de chaque chapitre (Whisper, horaires de mots), puis **affinés sur le signal audio** : chaque repère est posé au moment le plus silencieux de la pause qui précède le vers.
 
+### Sources des textes
+
+Le texte des vers vient de quatre fichiers de collation préparés pour le projet, qui consignent leurs sources et leurs variantes :
+
+| Poème | Vers | Source principale | Remarque |
+|---|---|---|---|
+| Bayqūniyya | 34 | [alukah.net](https://www.alukah.net/hosnihamama/1/118948/) (consonnes), vocalisation collationnée avec [diarfitri88/takhrij-frontend](https://github.com/diarfitri88/takhrij-frontend) | Quelques divergences de vocalisation entre sources, forme la plus répandue retenue. |
+| Tuḥfat al-aṭfāl | 61 | [mushafshamil.com](https://mushafshamil.com/books/tuhfat-al-atfal/) | Nombre de vers conforme à la tradition. |
+| Alfiyya | 1002 | Édition ʿAbd al-Muḥsin al-Qāsim (Médine, 2021), transcription [altwasolbook-hash/alfiya-memorizer](https://github.com/altwasolbook-hash/alfiya-memorizer), contrôlée avec OpenITI et Wikisource | Numérotation de cette édition. |
+| Ibn ʿĀshir | 311 + 5 | [chariaa.weebly.com](https://chariaa.weebly.com/160515781606-157515761606-1593157515881585.html), **source unique** | Vocalisation irrégulière, passages altérés, 311 vers au lieu de 316 ou 317 : les cinq derniers vers (312 à 316) n'ont pas de texte dans l'application. À collationner sur une édition imprimée avant de s'y fier pour mémoriser. |
+
+Les poèmes sont anciens et dans le domaine public ; la vocalisation et la mise en forme viennent des sources ci-dessus. Aucun vers n'a été reconstitué de mémoire.
+
 ### Ajouter un texte
 
 1. Créer ses chapitres dans `src/data/` (numéro, titre arabe, titre français, durée en secondes, source). Pour un audio hébergé, `hostedAudio("nom.mp3")` (dans `audioHost.ts`) ou une URL directe avec un `cacheName`.
