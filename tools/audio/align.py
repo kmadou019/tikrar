@@ -129,7 +129,7 @@ def refine(env, starts, duration, chapter_first=True):
     sont fiables à ±0,5 s). Fenêtre retenue après essai de quatre largeurs : 1,5 s avant, 0,5 s après."""
     out = []
     for k, t in enumerate(starts):
-        lo = 0.0 if (k == 0 and chapter_first) else max(0.0, t - 1.5)
+        lo = max(0.0, t - 1.5)  # même fenêtre pour tous, y compris le premier vers : le titre annoncé en reste exclu
         out.append(round(valley(env, lo, min(duration, t + 0.5), near=max(0.0, t - 0.1)), 2))
     return out
 
@@ -188,8 +188,9 @@ def align_chapter(a_words, verses, t_words, owner, cursor):
         return [], cursor, []
     vs = list(range(min(est), max(est) + 1))
     nwords = {v: int((owner == v).sum()) for v in vs}
-    if est[vs[-1]][2] < 0.5 * nwords[vs[-1]]:
-        vs = vs[:-1]  # dernier vers trop peu présent : il appartient au chapitre suivant
+    # Les chapitres sont coupés entre deux vers : un dernier vers même partiellement reconnu appartient à ce chapitre.
+    if est[vs[-1]][2] < max(2, 0.3 * nwords[vs[-1]]):
+        vs = vs[:-1]  # quasiment absent : probablement une fausse correspondance
     out = [{"verse": v, "start": est[v][0] if v in est else None, "matched": est[v][2] if v in est else 0, "words": nwords[v]} for v in vs]
     nxt = vs[-1] + 1
     return out, (first_word[nxt] if nxt < len(verses) else len(t_words)), unmatched_runs(a_words, pairs)

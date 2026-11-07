@@ -1,3 +1,4 @@
+import { STARTS as ALFIYYA } from "./verses/alfiyya";
 import { STARTS as BAYQUNIYYA } from "./verses/bayquniyya";
 import { STARTS as IBN_ABI_KAFF } from "./verses/ibn-abi-kaff";
 import { STARTS as IBN_ASHIR } from "./verses/ibn-ashir";
@@ -9,6 +10,7 @@ import { STARTS as TUHFA } from "./verses/tuhfa";
 // Chaque repère est posé au moment le plus silencieux de la pause qui précède le vers.
 // Les fichiers de `verses/` sont générés à partir de la transcription de chaque chapitre.
 const STARTS: Record<string, Record<number, number[]>> = {
+  alfiyya: ALFIYYA,
   bayquniyya: BAYQUNIYYA,
   "ibn-abi-kaff": IBN_ABI_KAFF,
   "ibn-ashir": IBN_ASHIR,
