@@ -40,5 +40,6 @@ yarn-error.*
 /ios
 /android
 
-# Claude Code (configuration locale)
-.claude/
+# Claude Code : configuration locale ignorée, skills du projet versionnés
+.claude/*
+!.claude/skills/
