@@ -5,11 +5,12 @@ import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import { CORPORA, Corpus } from "./src/data/corpora";
 import type { Chapter } from "./src/data/chapters";
-import { purgeStaleCache } from "./src/lib/remoteCache";
+import { purgeStaleCache, useDownloadState } from "./src/lib/remoteCache";
 import { THEMES } from "./src/theme";
 import { useSettings } from "./src/hooks/usePrefs";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { CorpusScreen } from "./src/screens/CorpusScreen";
+import { DownloadsScreen } from "./src/screens/DownloadsScreen";
 import { VerseScreen } from "./src/screens/VerseScreen";
 
 const SPEEDS = [0.75, 1, 1.25, 1.5];
@@ -20,6 +21,9 @@ function Main() {
   const { settings, ready, update } = useSettings();
   const [corpus, setCorpus] = useState<Corpus | null>(null);
   const [chapter, setChapter] = useState<Chapter | null>(null);
+  const [downloadsOpen, setDownloadsOpen] = useState(false);
+  const downloads = useDownloadState();
+  const downloadsBusy = downloads.bulk !== null || downloads.downloading.size > 0;
 
   // Au démarrage : retire du téléphone les anciennes révisions des audios (remplacés sur la release).
   useEffect(() => {
@@ -27,14 +31,15 @@ function Main() {
   }, []);
 
   useEffect(() => {
-    if (!corpus) return;
+    if (!corpus && !downloadsOpen) return;
     const sub = BackHandler.addEventListener("hardwareBackPress", () => {
-      if (chapter) setChapter(null);
+      if (downloadsOpen) setDownloadsOpen(false);
+      else if (chapter) setChapter(null);
       else setCorpus(null);
       return true;
     });
     return () => sub.remove();
-  }, [corpus, chapter]);
+  }, [corpus, chapter, downloadsOpen]);
 
   const themeName = settings.theme ?? (scheme === "dark" ? "dark" : "light");
   const t = THEMES[themeName];
@@ -68,10 +73,21 @@ function Main() {
           onToggleTheme={toggleTheme}
           onBack={() => setCorpus(null)}
           onOpenChapter={setChapter}
+          onOpenDownloads={() => setDownloadsOpen(true)}
+          downloadsBusy={downloadsBusy}
         />
       ) : (
-        <HomeScreen t={t} theme={themeName} corpora={CORPORA} onToggleTheme={toggleTheme} onOpen={setCorpus} />
+        <HomeScreen
+          t={t}
+          theme={themeName}
+          corpora={CORPORA}
+          onToggleTheme={toggleTheme}
+          onOpen={setCorpus}
+          onOpenDownloads={() => setDownloadsOpen(true)}
+          downloadsBusy={downloadsBusy}
+        />
       )}
+      {downloadsOpen && <DownloadsScreen t={t} corpora={CORPORA} onBack={() => setDownloadsOpen(false)} />}
     </View>
   );
 }

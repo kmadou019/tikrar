@@ -1,4 +1,4 @@
-import { Alert, FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Corpus } from "../data/corpora";
 import { isRemote } from "../lib/remoteCache";
@@ -8,7 +8,6 @@ import { Theme, ThemeName } from "../theme";
 import { clamp, usePrefs } from "../hooks/usePrefs";
 import { usePlayback } from "../hooks/usePlayback";
 import { useRemoteCache } from "../hooks/useRemoteCache";
-import { DownloadBar } from "../components/DownloadBar";
 import { GroupChips } from "../components/GroupChips";
 import { Header } from "../components/Header";
 import { SelectionBar } from "../components/SelectionBar";
@@ -27,9 +26,11 @@ type Props = {
   onToggleTheme: () => void;
   onBack: () => void;
   onOpenChapter: (chapter: Chapter) => void;
+  onOpenDownloads: () => void;
+  downloadsBusy: boolean;
 };
 
-export function CorpusScreen({ t, theme, corpus, speed, onCycleSpeed, onToggleTheme, onBack, onOpenChapter }: Props) {
+export function CorpusScreen({ t, theme, corpus, speed, onCycleSpeed, onToggleTheme, onBack, onOpenChapter, onOpenDownloads, downloadsBusy }: Props) {
   const insets = useSafeAreaInsets();
   const chapters = corpus.chapters;
   const { prefs, ready, update, repsOf, setRep, setAll, toggle, toggleAll, toggleGroup } = usePrefs(corpus.id, chapters);
@@ -45,28 +46,6 @@ export function CorpusScreen({ t, theme, corpus, speed, onCycleSpeed, onToggleTh
     resolve: cache.resolve,
     prefetch: cache.prefetch,
   });
-
-  const onDownloadAll = () =>
-    Alert.alert(
-      "Tout télécharger ?",
-      `${corpus.downloadSize ?? "Les fichiers"} seront enregistrés sur le téléphone pour l'écoute hors ligne. Utilisez de préférence le Wi-Fi.`,
-      [
-        { text: "Annuler", style: "cancel" },
-        {
-          text: "Télécharger",
-          onPress: () =>
-            cache.downloadAll().then((failed) => {
-              if (failed) Alert.alert("Téléchargement incomplet", "Certains fichiers n'ont pas pu être téléchargés. Vérifiez votre connexion, puis relancez.");
-            }),
-        },
-      ],
-    );
-
-  const onRemoveAll = () =>
-    Alert.alert("Supprimer les téléchargements ?", "Les fichiers seront retirés du téléphone. Vous pourrez les télécharger à nouveau.", [
-      { text: "Annuler", style: "cancel" },
-      { text: "Supprimer", style: "destructive", onPress: () => { pb.stop(); cache.removeAll(); } },
-    ]);
 
   if (!ready) return <View style={{ flex: 1 }} />;
 
@@ -85,6 +64,8 @@ export function CorpusScreen({ t, theme, corpus, speed, onCycleSpeed, onToggleTh
         t={t}
         theme={theme}
         onToggleTheme={onToggleTheme}
+        onOpenDownloads={onOpenDownloads}
+        downloadsBusy={downloadsBusy}
         onBack={onBack}
         kicker={corpus.fr.toUpperCase()}
         titleAr={corpus.ar}
@@ -106,17 +87,6 @@ export function CorpusScreen({ t, theme, corpus, speed, onCycleSpeed, onToggleTh
         onToursInc={() => update({ tours: clamp(prefs.tours + 1, 1, 20) })}
         onPlay={pb.playSelection}
       />
-      {remote && (
-        <DownloadBar
-          t={t}
-          cachedCount={cache.cached.size}
-          total={chapters.length}
-          bulk={cache.bulk}
-          onDownloadAll={onDownloadAll}
-          onCancel={cache.cancelDownloadAll}
-          onRemoveAll={onRemoveAll}
-        />
-      )}
       {corpus.groups && (
         <GroupChips
           t={t}

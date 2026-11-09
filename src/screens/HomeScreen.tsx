@@ -11,12 +11,14 @@ type Props = {
   corpora: Corpus[];
   onToggleTheme: () => void;
   onOpen: (corpus: Corpus) => void;
+  onOpenDownloads: () => void;
+  downloadsBusy: boolean;
 };
 
-export function HomeScreen({ t, theme, corpora, onToggleTheme, onOpen }: Props) {
+export function HomeScreen({ t, theme, corpora, onToggleTheme, onOpen, onOpenDownloads, downloadsBusy }: Props) {
   return (
     <View style={{ flex: 1 }}>
-      <Header t={t} theme={theme} onToggleTheme={onToggleTheme} kicker="TIKRAR" titleAr="تكرار" subtitle="Choisissez un texte à mémoriser" />
+      <Header t={t} theme={theme} onToggleTheme={onToggleTheme} onOpenDownloads={onOpenDownloads} downloadsBusy={downloadsBusy} showLogo subtitle="Choisissez un texte à mémoriser" />
       <ScrollView contentContainerStyle={styles.list}>
         {corpora.map((c) => {
           const ready = c.chapters.length > 0;

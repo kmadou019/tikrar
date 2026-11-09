@@ -19,6 +19,8 @@ export type Corpus = {
   // Poids total des fichiers à télécharger, affiché avant « Tout télécharger ».
   downloadSize?: string;
   unit?: string;
+  // Octets par seconde d'audio, pour estimer le poids avant téléchargement (mp3 mono 64 kb/s par défaut).
+  bytesPerSecond?: number;
   // Avertissement affiché au-dessus des vers (par exemple sur la fiabilité du texte).
   textNote?: string;
 };
@@ -95,6 +97,7 @@ export const CORPORA: Corpus[] = [
     groups: MUSHAF_GROUPS,
     downloadSize: "≈ 226 Mo",
     unit: "sourates",
+    bytesPerSecond: 8900,
     groupsNote: "L’audio est découpé par sourate : un juz inclut les sourates qu’il touche, lues en entier.",
   },
 ];
