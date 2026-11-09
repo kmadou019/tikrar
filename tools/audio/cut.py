@@ -4,6 +4,8 @@ usage : cut.py --align align.json --chapters chapitres.json --source enregistrem
 
 chapitres.json : [{"n": 1, "ar": "…", "fr": "…", "first": 1, "last": 7}, …]  (numéros de vers du texte)
 
+Les frontières sont posées dans un silence (le premier après l'horaire estimé : les horaires de mots sont fiables à ±0,5 s,
+couper à ces horaires peut tomber au milieu d'un mot).
 Un chapitre commence juste après le dernier mot du chapitre précédent (il contient donc le titre annoncé par le
 récitant, s'il y en a un) ; le premier commence au premier vers, ce qui retire la présentation du récitant.
 Écrit DOSSIER/<prefix>-NN.mp3, DOSSIER/chapters_meta.json et DOSSIER/verse_map.json (début de chaque vers dans son chapitre).
@@ -13,7 +15,8 @@ import json
 import os
 import subprocess
 
-from common import ffmpeg
+from common import envelope, ffmpeg, load_audio
+from edges import quiet_after
 
 TITLE_MAX_GAP = 8.0  # au-delà, on ne suppose pas de titre annoncé entre deux chapitres
 TAIL = 1.5  # secondes gardées après le dernier mot
@@ -41,8 +44,11 @@ def main():
             prev_end = verses[chapters[k - 1]["last"]]["last_word_end"]
             start = prev_end + 0.15 if prev_end is not None and s1 - prev_end <= TITLE_MAX_GAP else s1 - 0.15
         starts.append(min(start, s1))
+    env = envelope(load_audio(a.source))
+    # frontières intérieures : premier silence à partir de l'horaire estimé, sans dépasser le début du premier vers
+    starts = [starts[0]] + [min(quiet_after(env, s), verses[c["first"]]["start"]) for s, c in zip(starts[1:], chapters[1:])]
     last_end = verses[chapters[-1]["last"]]["last_word_end"] or al["duration"]
-    ends = starts[1:] + [min(al["duration"], last_end + TAIL)]
+    ends = starts[1:] + [min(al["duration"], quiet_after(env, last_end + TAIL))]
 
     meta, vmap = [], {}
     for c, a0, b0 in zip(chapters, starts, ends):

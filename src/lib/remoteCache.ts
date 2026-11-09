@@ -34,3 +34,15 @@ export function removeCached(c: Chapter): void {
   const f = fileOf(c);
   if (f.exists) f.delete();
 }
+
+// Supprime les fichiers du cache qui ne correspondent plus à aucun chapitre (anciennes révisions d'un audio).
+export function purgeStaleCache(validNames: Set<string>): void {
+  try {
+    if (!dir.exists) return;
+    for (const entry of dir.list()) {
+      if (entry instanceof File && !validNames.has(entry.name)) entry.delete();
+    }
+  } catch {
+    // nettoyage facultatif : une erreur ne doit jamais empêcher l'application de démarrer
+  }
+}

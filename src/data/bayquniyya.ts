@@ -7,7 +7,7 @@ export const BAYQUNIYYA_CHAPTERS: Chapter[] = [
   { n: 2, ar: "الصحيح والحسن والضعيف", fr: "Le ṣaḥīḥ, le ḥasan et le ḍaʿīf", dur: 24, ...hostedAudio("bayquniyya-02.mp3") },
   { n: 3, ar: "المرفوع والمقطوع والمسند والمتصل", fr: "Le marfūʿ, le maqṭūʿ, le musnad et le muttaṣil", dur: 18, ...hostedAudio("bayquniyya-03.mp3") },
   { n: 4, ar: "المسلسل والعزيز والمشهور", fr: "Le musalsal, l’ʿazīz et le mashhūr", dur: 18, ...hostedAudio("bayquniyya-04.mp3") },
-  { n: 5, ar: "المعنعن والمبهم والعالي والنازل", fr: "Le muʿanʿan, le mubham, le ʿālī et le nāzil", dur: 11, ...hostedAudio("bayquniyya-05.mp3") },
+  { n: 5, ar: "المعنعن والمبهم والعالي والنازل", fr: "Le muʿanʿan, le mubham, le ʿālī et le nāzil", dur: 12, ...hostedAudio("bayquniyya-05.mp3") },
   { n: 6, ar: "الموقوف والمرسل والغريب والمنقطع", fr: "Le mawqūf, le mursal, le gharīb et le munqaṭiʿ", dur: 18, ...hostedAudio("bayquniyya-06.mp3") },
   { n: 7, ar: "المعضل والمدلس", fr: "Le muʿḍal et le mudallas", dur: 18, ...hostedAudio("bayquniyya-07.mp3") },
   { n: 8, ar: "الشاذ والمقلوب والفرد والمعلل", fr: "Le shādhdh, le maqlūb, le fard et le muʿall", dur: 24, ...hostedAudio("bayquniyya-08.mp3") },

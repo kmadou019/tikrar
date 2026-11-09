@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import { CORPORA, Corpus } from "./src/data/corpora";
 import type { Chapter } from "./src/data/chapters";
+import { purgeStaleCache } from "./src/lib/remoteCache";
 import { THEMES } from "./src/theme";
 import { useSettings } from "./src/hooks/usePrefs";
 import { HomeScreen } from "./src/screens/HomeScreen";
@@ -19,6 +20,11 @@ function Main() {
   const { settings, ready, update } = useSettings();
   const [corpus, setCorpus] = useState<Corpus | null>(null);
   const [chapter, setChapter] = useState<Chapter | null>(null);
+
+  // Au démarrage : retire du téléphone les anciennes révisions des audios (remplacés sur la release).
+  useEffect(() => {
+    purgeStaleCache(new Set(CORPORA.flatMap((c) => c.chapters.map((ch) => ch.cacheName ?? ""))));
+  }, []);
 
   useEffect(() => {
     if (!corpus) return;

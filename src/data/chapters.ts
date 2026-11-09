@@ -29,14 +29,14 @@ export const ASHIR_CHAPTERS: Chapter[] = [
   { n: 9, ar: "نواقض الوضوء", fr: "Ce qui annule le wuḍūʾ", dur: 39, ...hostedAudio("ashir-09-nawaqid-wudu.mp3") },
   { n: 10, ar: "الغسل", fr: "Le grand lavage (ghusl)", dur: 71, ...hostedAudio("ashir-10-ghusl.mp3") },
   { n: 11, ar: "التيمم", fr: "Tayammum", dur: 63, ...hostedAudio("ashir-11-tayammum.mp3") },
-  { n: 12, ar: "الصلاة: الفرائض والسنن", fr: "Prière : conditions, piliers, sunan", dur: 246, ...hostedAudio("ashir-12-priere-conditions.mp3") },
-  { n: 13, ar: "الصلوات الخمس", fr: "Les cinq prières et l’imam", dur: 114, ...hostedAudio("ashir-13-priere-cinq.mp3") },
+  { n: 12, ar: "الصلاة: الفرائض والسنن", fr: "Prière : conditions, piliers, sunan", dur: 245, ...hostedAudio("ashir-12-priere-conditions.mp3") },
+  { n: 13, ar: "الصلوات الخمس", fr: "Les cinq prières et l’imam", dur: 115, ...hostedAudio("ashir-13-priere-cinq.mp3") },
   { n: 14, ar: "الجمعة", fr: "La prière du vendredi", dur: 142, ...hostedAudio("ashir-14-vendredi.mp3") },
   { n: 15, ar: "الزكاة", fr: "La zakat", dur: 182, ...hostedAudio("ashir-15-zakat.mp3") },
   { n: 16, ar: "الصيام", fr: "Le jeûne", dur: 112, ...hostedAudio("ashir-16-jeune.mp3") },
   { n: 17, ar: "الحج", fr: "Le pèlerinage (ḥajj)", dur: 314, ...hostedAudio("ashir-17-hajj.mp3") },
-  { n: 18, ar: "العمرة والزيارة", fr: "La ʿumra et la visite du Prophète ﷺ", dur: 55, ...hostedAudio("ashir-18-omra.mp3") },
-  { n: 19, ar: "مبادئ التصوف", fr: "Purification de l’âme (tasawwuf)", dur: 181, ...hostedAudio("ashir-19-tasawwuf.mp3") },
+  { n: 18, ar: "العمرة والزيارة", fr: "La ʿumra et la visite du Prophète ﷺ", dur: 54, ...hostedAudio("ashir-18-omra.mp3") },
+  { n: 19, ar: "مبادئ التصوف", fr: "Purification de l’âme (tasawwuf)", dur: 180, ...hostedAudio("ashir-19-tasawwuf.mp3") },
 ];
 
 export const totalDuration = (chapters: Chapter[]) => chapters.reduce((s, c) => s + c.dur, 0);
