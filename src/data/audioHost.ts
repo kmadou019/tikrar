@@ -7,7 +7,7 @@ const AUDIO_BASE_URL = "https://github.com/kmadou019/tikrar/releases/download/au
 // sous leur nom, et sans changement de révision il ne verrait pas la nouvelle version. Les anciennes copies sont
 // supprimées au démarrage (voir purgeStaleCache).
 // 2 : frontières de chapitres recalées sur des silences (le dernier mot d'un chapitre n'est plus coupé).
-const AUDIO_REVISION = 2;
+const AUDIO_REVISION = 3;
 
 // Chapitre téléchargé au premier usage, puis conservé sur le téléphone sous `<nom>.r<révision>.mp3`.
 export const hostedAudio = (fileName: string): Pick<Chapter, "source" | "cacheName"> => ({
