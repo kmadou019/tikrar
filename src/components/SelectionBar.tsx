@@ -30,7 +30,7 @@ export function SelectionBar(p: Props) {
           <Text style={[styles.toggleText, { color: t.accent }]}>{p.allChecked ? "Tout décocher" : "Tout cocher"}</Text>
         </Pressable>
         <View style={styles.allReps}>
-          <Text style={[styles.small, { color: t.muted }]}>Répétitions pour tous</Text>
+          <Text style={[styles.small, { color: t.muted }]} numberOfLines={2}>Répétitions pour tous</Text>
           <Stepper
             t={t}
             value={p.allValue}
@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
   top: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", columnGap: 8 },
   toggleAll: { height: 44, paddingHorizontal: 2, justifyContent: "center" },
   toggleText: { fontFamily: FONT.sansSemi, fontSize: 14 },
-  allReps: { flexDirection: "row", alignItems: "center", columnGap: 8 },
-  small: { fontFamily: FONT.sans, fontSize: 12 },
+  allReps: { flexShrink: 1, flexDirection: "row", alignItems: "center", justifyContent: "flex-end", columnGap: 8 },
+  small: { flexShrink: 1, fontFamily: FONT.sans, fontSize: 12, textAlign: "right" },
   bottom: { flexDirection: "row", columnGap: 8, alignItems: "stretch" },
   tours: { flexDirection: "row", alignItems: "center", borderWidth: 1, borderRadius: 14 },
   toursBtn: { width: 40, height: 56, alignItems: "center", justifyContent: "center" },

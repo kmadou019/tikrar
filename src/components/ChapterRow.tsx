@@ -55,13 +55,12 @@ export function ChapterRow({ t, chapter, checked, reps, isActive, isPlaying, cur
         </Pressable>
         <View style={styles.controls}>
           {isActive ? (
-            <Text style={[styles.status, { color: t.accent }]}>
+            <Text style={[styles.status, { color: t.accent }]} numberOfLines={2}>
               {(isPlaying ? "En lecture" : "En pause") + ` · rép. ${currentRep}/${reps}`}
             </Text>
           ) : (
-            <Text style={[styles.dur, { color: t.muted }]}>{fmt(chapter.dur)}{cloud === "missing" ? " · à télécharger" : cloud === "downloading" ? " · téléchargement…" : cloud === "ready" ? " · hors ligne" : ""}</Text>
+            <Text style={[styles.dur, { color: t.muted }]} numberOfLines={2}>{fmt(chapter.dur)}{cloud === "missing" ? " · à télécharger" : cloud === "downloading" ? " · téléchargement…" : cloud === "ready" ? " · hors ligne" : ""}</Text>
           )}
-          <View style={{ flex: 1 }} />
           <Stepper
             t={t}
             value={reps}
@@ -98,8 +97,8 @@ const styles = StyleSheet.create({
   ar: { fontFamily: FONT.arabic, fontSize: 24, lineHeight: 37, writingDirection: "rtl", textAlign: "right" },
   frRow: { flexDirection: "row", alignItems: "center", justifyContent: "flex-end", columnGap: 6 },
   fr: { flexShrink: 1, fontFamily: FONT.sans, fontSize: 13, textAlign: "right" },
-  controls: { flexDirection: "row", alignItems: "center", columnGap: 8, paddingTop: 4 },
-  status: { fontFamily: FONT.sansSemi, fontSize: 12, fontVariant: ["tabular-nums"] },
-  dur: { fontFamily: FONT.sans, fontSize: 13, fontVariant: ["tabular-nums"] },
+  controls: { flexDirection: "row", alignItems: "center", justifyContent: "flex-end", columnGap: 8, rowGap: 4, paddingTop: 4 },
+  status: { flex: 1, flexShrink: 1, minWidth: 0, fontFamily: FONT.sansSemi, fontSize: 12, fontVariant: ["tabular-nums"] },
+  dur: { flex: 1, flexShrink: 1, minWidth: 0, fontFamily: FONT.sans, fontSize: 13, fontVariant: ["tabular-nums"] },
   play: { width: 44, height: 44, borderRadius: 22, borderWidth: 1, alignItems: "center", justifyContent: "center" },
 });
