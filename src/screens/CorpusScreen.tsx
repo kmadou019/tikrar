@@ -8,6 +8,7 @@ import { Theme, ThemeName } from "../theme";
 import { clamp, usePrefs } from "../hooks/usePrefs";
 import { usePlayback } from "../hooks/usePlayback";
 import { useRemoteCache } from "../hooks/useRemoteCache";
+import { ReciterChips } from "../components/ReciterChips";
 import { GroupChips } from "../components/GroupChips";
 import { Header } from "../components/Header";
 import { SelectionBar } from "../components/SelectionBar";
@@ -21,6 +22,8 @@ type Props = {
   t: Theme;
   theme: ThemeName;
   corpus: Corpus;
+  recitations: Corpus[];
+  onSelectRecitation: (c: Corpus) => void;
   speed: number;
   onCycleSpeed: () => void;
   onToggleTheme: () => void;
@@ -30,7 +33,7 @@ type Props = {
   downloadsBusy: boolean;
 };
 
-export function CorpusScreen({ t, theme, corpus, speed, onCycleSpeed, onToggleTheme, onBack, onOpenChapter, onOpenDownloads, downloadsBusy }: Props) {
+export function CorpusScreen({ t, theme, corpus, recitations, onSelectRecitation, speed, onCycleSpeed, onToggleTheme, onBack, onOpenChapter, onOpenDownloads, downloadsBusy }: Props) {
   const insets = useSafeAreaInsets();
   const chapters = corpus.chapters;
   const { prefs, ready, update, repsOf, setRep, setAll, toggle, toggleAll, toggleGroup } = usePrefs(corpus.id, chapters);
@@ -71,6 +74,7 @@ export function CorpusScreen({ t, theme, corpus, speed, onCycleSpeed, onToggleTh
         titleAr={corpus.ar}
         subtitle={`${chapters.length} ${corpus.unit ?? "chapitres"} · ${Math.floor(all / 3600) ? Math.floor(all / 3600) + " h " : ""}${Math.floor((all % 3600) / 60)} min`}
       />
+      {recitations.length > 1 && <ReciterChips t={t} items={recitations} current={corpus.id} onSelect={onSelectRecitation} />}
       <SelectionBar
         t={t}
         allChecked={count === chapters.length}

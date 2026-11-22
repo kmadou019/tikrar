@@ -200,11 +200,11 @@ def run_chapters(args):
     verses = json.load(open(args.texts, encoding="utf-8"))[args.corpus]
     t_words, owner = text_words(verses)
     files = sorted(glob.glob(f"{args.transcripts}/{args.prefix}-*.json"))
-    last_num = max(int(os.path.basename(f)[:-5].split("-")[1]) for f in files)
+    last_num = max(int(os.path.basename(f)[:-5].rsplit("-", 1)[1]) for f in files)
     cursor, result = 0, {}
     for f in files:
         name = os.path.basename(f)[:-5]
-        num = int(name.split("-")[1])
+        num = int(name.rsplit("-", 1)[1])
         tr = json.load(open(f))
         a = asr_words(tr)
         entries, cursor, runs = align_chapter(a, verses, t_words, owner, cursor)
@@ -239,6 +239,17 @@ def run_whole(args):
     verses = json.load(open(args.texts, encoding="utf-8"))[args.corpus]
     tr = json.load(open(args.transcript))
     res = align_whole(tr, verses, args.audio)
+    # vers récités en fin d'enregistrement mais absents du texte : ajoutés sans texte (2 segments = 1 vers)
+    tail = [r for r in res["unmatched_runs"] if r[1] >= res["duration"] - 8 and r[2] >= 6]
+    if tail:
+        segs = [s for s in tr["segments"] if s["start"] >= tail[0][0] - 0.2]
+        if len(segs) % 2 == 0:
+            ex = refine(envelope(load_audio(args.audio)), [segs[k]["start"] for k in range(0, len(segs), 2)], res["duration"], chapter_first=False)
+            nxt = res["verses"][-1]["verse"] + 1
+            res["verses"] += [{"verse": nxt + k, "start": s, "last_word_end": None, "matched": 0, "words": 0, "extra": True} for k, s in enumerate(ex)]
+            print(f"+{len(ex)} vers de fin sans texte")
+        else:
+            print("fin d'enregistrement : nombre impair de segments, vers sans texte non créés")
     json.dump(res, open(args.out, "w"), ensure_ascii=False)
     ok = sum(1 for v in res["verses"] if v["matched"] >= 0.5 * v["words"])
     print(f"{len(res['verses'])} vers, {ok} bien alignés ; mots non reconnus (≥6) : {res['unmatched_runs'][:10]}")

@@ -11,6 +11,8 @@ export const VERSE_TEXTS: Record<string, Record<number, [string, string][]>> = {
   bayquniyya: BAYQUNIYYA,
   "ibn-abi-kaff": IBN_ABI_KAFF,
   "ibn-ashir": IBN_ASHIR,
+  // Même texte que l'enregistrement d'origine : un autre récitant ne change pas les mots.
+  "ibn-ashir-fadli": IBN_ASHIR,
   tuhfa: TUHFA,
 };
 

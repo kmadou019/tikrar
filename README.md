@@ -15,9 +15,11 @@ Application Android pour **mémoriser des textes récités en arabe**, en écout
 
 ## Textes
 
+Un texte peut avoir plusieurs récitants : on les choisit en haut de l'écran du texte. Chaque récitant a ses propres chapitres, repères de vers et téléchargements ; le texte des vers est commun.
+
 | Texte | Contenu | Source de l'audio |
 |---|---|---|
-| *al-Murshid al-Muʿīn* (Matn Ibn ʿĀshir) | 19 chapitres, ≈ 34 min | Enregistrement découpé par le projet |
+| *al-Murshid al-Muʿīn* (Matn Ibn ʿĀshir) | 19 chapitres, ≈ 34 min | Deux récitants au choix. Enregistrement d'origine (récitant non identifié), découpé par le projet ; et Yūsuf al-Faḍlī al-Ḥasanī (≈ 38 min), chaîne YouTube « المنـهـل Al Manhal » (licence YouTube standard), découpé par le projet |
 | *Alfiyya d'Ibn Mālik* | 68 chapitres, ≈ 2 h 09 | Récitation de ʿAbd al-Ghanī Ṣādiq al-Faqīh, découpée par le projet |
 | *Bayqūniyya* (ʿUmar al-Bayqūnī) | 12 chapitres, ≈ 3 min 30 | Récitation du Dr ʿAbd al-ʿAzīz aṣ-Ṣīnī, découpée par le projet |
 | *Tuḥfat al-aṭfāl* (al-Jamzūrī) | 10 chapitres, ≈ 8 min 30 | Récitation du cheikh Badr at-Turkī, découpée par le projet |

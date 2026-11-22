@@ -3,7 +3,7 @@ import { BackHandler, StyleSheet, View, useColorScheme } from "react-native";
 import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
-import { CORPORA, Corpus } from "./src/data/corpora";
+import { CORPORA, Corpus, recitationsOf } from "./src/data/corpora";
 import type { Chapter } from "./src/data/chapters";
 import { purgeStaleCache, useDownloadState } from "./src/lib/remoteCache";
 import { THEMES } from "./src/theme";
@@ -68,6 +68,8 @@ function Main() {
           t={t}
           theme={themeName}
           corpus={corpus}
+          recitations={recitationsOf(corpus)}
+          onSelectRecitation={setCorpus}
           speed={speed}
           onCycleSpeed={cycleSpeed}
           onToggleTheme={toggleTheme}

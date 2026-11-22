@@ -1,5 +1,5 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
-import { Corpus } from "../data/corpora";
+import { Corpus, recitationsOf } from "../data/corpora";
 import { est, fmt, totalDuration } from "../data/chapters";
 import { FONT, Theme, ThemeName } from "../theme";
 import { Header } from "../components/Header";
@@ -20,7 +20,8 @@ export function HomeScreen({ t, theme, corpora, onToggleTheme, onOpen, onOpenDow
     <View style={{ flex: 1 }}>
       <Header t={t} theme={theme} onToggleTheme={onToggleTheme} onOpenDownloads={onOpenDownloads} downloadsBusy={downloadsBusy} showLogo subtitle="Choisissez un texte à mémoriser" />
       <ScrollView contentContainerStyle={styles.list}>
-        {corpora.map((c) => {
+        {corpora.filter((c) => !c.variantOf).map((c) => {
+          const nRec = recitationsOf(c).length;
           const ready = c.chapters.length > 0;
           const total = totalDuration(c.chapters);
           return (
@@ -37,7 +38,7 @@ export function HomeScreen({ t, theme, corpora, onToggleTheme, onOpen, onOpenDow
                 <Text style={[styles.fr, { color: t.ink }]}>{c.fr}</Text>
                 <Text style={[styles.desc, { color: t.muted }]}>{c.description}</Text>
                 <Text style={[styles.meta, { color: t.muted }]}>
-                  {ready ? `${c.chapters.length} chapitres · ${est(total)} · ${fmt(total)}` : "Bientôt disponible"}
+                  {ready ? `${c.chapters.length} chapitres · ${est(total)} · ${fmt(total)}${nRec > 1 ? ` · ${nRec} récitants` : ""}` : "Bientôt disponible"}
                 </Text>
               </View>
               {ready && <Icon name="chevron" size={22} color={t.muted} />}

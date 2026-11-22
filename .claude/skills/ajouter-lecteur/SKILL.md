@@ -29,7 +29,7 @@ Ajoute un enregistrement (et son texte) à l'application Tikrar, de la recherche
 
 - **Lien** : `cd tools/audio && $PY fetch.py info URL` (titre, chaîne, durée, licence, description).
 - **Lecteur + poème** : plusieurs requêtes, en arabe et en translittération (`$PY fetch.py search "<requête>" 10`), avec « كاملة », « متن », le nom du lecteur ; puis le web (WebSearch) pour d'autres sources (sites de récitation, archive.org). Ne retiens que des enregistrements **complets**, d'un **seul** récitant, dont la durée est plausible pour le poème. Garde les 2-3 meilleurs candidats avec leurs métadonnées.
-- Si le poème existe déjà dans Tikrar avec un autre lecteur : le choix du lecteur (plusieurs lecteurs par poème) n'est **pas encore implémenté**. Arrête-toi à l'étape 10 et explique-le (ne bricole pas le modèle de données).
+- Si le poème existe déjà dans Tikrar avec un autre lecteur : le choix du lecteur est implémenté. Le nouvel enregistrement devient un `Corpus` de variante (`variantOf: "<id du texte de base>"`, `reciter: "<nom>"`, id `<texte>-<lecteur>`), avec ses chapitres (`<prefixe>-NN.mp3`) et ses repères de vers (`verses/<id>.ts`) ; le texte des vers est partagé (même objet dans `verseTexts.ts`). Les chapitres reprennent **les mêmes plages de vers** que l'enregistrement existant (voir `work/align/` ou les repères existants). Exemple : `ibn-ashir-fadli`. Le récitant de l'enregistrement d'origine reçoit lui aussi un `reciter`.
 - Télécharge : `$PY fetch.py download URL ~/Documents/ibn_achir/<nom>-src/<nom>.mp3`. Vérifie la durée (ffmpeg).
 
 ## Étape 2 — Le texte intégral : chercher à fond
@@ -58,6 +58,8 @@ Objectif : un texte **complet, vocalisé, numéroté**, collationné sur **au mo
 
 `$PY tools/audio/cut.py --align align.json --chapters chapitres.json --source <nom>.mp3 --out-dir <dossier>/out --prefix <prefixe>`
 (`prefixe` = poème, plus le lecteur si le poème a plusieurs lecteurs : `bayquniyya`, `ashir-nadhir`…). Produit `<prefixe>-NN.mp3`, `chapters_meta.json`, `verse_map.json`. Vérifie le nombre de fichiers et leurs durées.
+
+**Contrôle des frontières (obligatoire)** : un enregistrement continu (peu de pauses) fait tomber la coupe au milieu d'un mot ou laisse un titre en fin de chapitre. Fais transcrire par Whisper les 3,5 dernières secondes de chaque chapitre et les 3,5 premières du suivant : le dernier mot du dernier vers doit finir le chapitre, et le début suivant ne doit pas le répéter ni commencer par un fragment (« تاب » pour « كتاب »). Corrige les frontières fautives en testant plusieurs creux sonores candidats, puis impose-les avec `cut.py --starts starts.json` (`{numéro de chapitre: début en secondes}`). Les repères de vers d'un enregistrement entier sont peu fiables en début de chapitre : retranscris chaque fichier de chapitre et recalcule avec `align.py chapters` (préfixe de la forme `ashir-fadli`).
 
 ## Étape 8 — Publier l'audio
 

@@ -2,6 +2,7 @@ import { STARTS as ALFIYYA } from "./verses/alfiyya";
 import { STARTS as BAYQUNIYYA } from "./verses/bayquniyya";
 import { STARTS as IBN_ABI_KAFF } from "./verses/ibn-abi-kaff";
 import { STARTS as IBN_ASHIR } from "./verses/ibn-ashir";
+import { STARTS as IBN_ASHIR_FADLI } from "./verses/ibn-ashir-fadli";
 import { STARTS as TUHFA } from "./verses/tuhfa";
 
 // Début de chaque vers dans l'audio de son chapitre, en secondes depuis le début du fichier.
@@ -14,6 +15,7 @@ const STARTS: Record<string, Record<number, number[]>> = {
   bayquniyya: BAYQUNIYYA,
   "ibn-abi-kaff": IBN_ABI_KAFF,
   "ibn-ashir": IBN_ASHIR,
+  "ibn-ashir-fadli": IBN_ASHIR_FADLI,
   tuhfa: TUHFA,
 };
 

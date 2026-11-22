@@ -3,6 +3,7 @@ import { BAYQUNIYYA_CHAPTERS } from "./bayquniyya";
 import { IBN_ABI_KAFF_CHAPTERS } from "./ibn-abi-kaff";
 import { TAHAWIYYA_CHAPTERS } from "./tahawiyya";
 import { TUHFA_CHAPTERS } from "./tuhfa";
+import { ASHIR_FADLI_CHAPTERS } from "./ashir-fadli";
 import { ASHIR_CHAPTERS, Chapter, ChapterGroup } from "./chapters";
 import { MUSHAF_CHAPTERS, MUSHAF_GROUPS } from "./mushaf";
 
@@ -23,6 +24,11 @@ export type Corpus = {
   bytesPerSecond?: number;
   // Avertissement affiché au-dessus des vers (par exemple sur la fiabilité du texte).
   textNote?: string;
+  // Récitant de cet enregistrement. Un même texte peut avoir plusieurs enregistrements : chacun est un `Corpus`
+  // (ses chapitres, ses repères de vers, ses téléchargements) ; les variantes pointent vers le texte de base par `variantOf`
+  // et n'apparaissent pas sur l'accueil : on les choisit depuis l'écran du texte.
+  reciter?: string;
+  variantOf?: string;
 };
 
 export const CORPORA: Corpus[] = [
@@ -35,6 +41,19 @@ export const CORPORA: Corpus[] = [
     description: "Croyance, purification, prière, zakat, jeûne et pèlerinage",
     chapters: ASHIR_CHAPTERS,
     downloadSize: "≈ 16 Mo",
+    reciter: "Enregistrement d’origine",
+  },
+  {
+    id: "ibn-ashir-fadli",
+    variantOf: "ibn-ashir",
+    reciter: "Yūsuf al-Faḍlī al-Ḥasanī",
+    ar: "المرشد المعين",
+    fr: "Matn Ibn ʿĀshir",
+    kicker: "FIQH MALIKITE ET CROYANCE",
+    artist: "Matn Ibn ʿĀshir · Yūsuf al-Faḍlī al-Ḥasanī (chaîne Al Manhal)",
+    description: "Croyance, purification, prière, zakat, jeûne et pèlerinage",
+    chapters: ASHIR_FADLI_CHAPTERS,
+    downloadSize: "≈ 18 Mo",
   },
   {
     id: "alfiyya",
@@ -101,3 +120,12 @@ export const CORPORA: Corpus[] = [
     groupsNote: "L’audio est découpé par sourate : un juz inclut les sourates qu’il touche, lues en entier.",
   },
 ];
+
+// Les enregistrements d'un même texte (le texte de base d'abord), dans l'ordre de CORPORA.
+export const recitationsOf = (c: Corpus): Corpus[] => {
+  const base = c.variantOf ?? c.id;
+  return CORPORA.filter((x) => (x.variantOf ?? x.id) === base);
+};
+
+// Nom affiché : le texte, suivi du récitant lorsque le texte en a plusieurs.
+export const displayName = (c: Corpus): string => (recitationsOf(c).length > 1 && c.reciter ? `${c.fr} · ${c.reciter}` : c.fr);

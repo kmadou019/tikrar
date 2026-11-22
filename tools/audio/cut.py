@@ -29,6 +29,7 @@ def main():
     p.add_argument("--source", required=True)
     p.add_argument("--out-dir", required=True)
     p.add_argument("--prefix", required=True)
+    p.add_argument("--starts", help="JSON {numéro de chapitre: début en secondes} : remplace le début calculé (corrections après contrôle à l'écoute automatique)")
     a = p.parse_args()
     al = json.load(open(a.align))
     verses = {v["verse"]: v for v in al["verses"]}
@@ -47,8 +48,13 @@ def main():
     env = envelope(load_audio(a.source))
     # frontières intérieures : premier silence à partir de l'horaire estimé, sans dépasser le début du premier vers
     starts = [starts[0]] + [min(quiet_after(env, s), verses[c["first"]]["start"]) for s, c in zip(starts[1:], chapters[1:])]
-    last_end = verses[chapters[-1]["last"]]["last_word_end"] or al["duration"]
-    ends = starts[1:] + [min(al["duration"], quiet_after(env, last_end + TAIL))]
+    forced = json.load(open(a.starts)) if a.starts else {}
+    for n, sec in forced.items():
+        k = next(i for i, c in enumerate(chapters) if c["n"] == int(n))
+        starts[k] = float(sec)  # imposé : le premier vers peut alors commencer au tout début du fichier (titre annoncé inclus)
+    last_end = verses[chapters[-1]["last"]]["last_word_end"]
+    # dernier vers sans texte (vers de clôture) : pas d'horaire de fin de mot, on garde l'enregistrement jusqu'au bout
+    ends = starts[1:] + [al["duration"] if last_end is None else min(al["duration"], quiet_after(env, last_end + TAIL))]
 
     meta, vmap = [], {}
     for c, a0, b0 in zip(chapters, starts, ends):
@@ -57,6 +63,8 @@ def main():
                         "-ac", "1", "-ar", "32000", "-b:a", "64k", f"{a.out_dir}/{name}"], check=True)
         meta.append({"n": c["n"], "ar": c["ar"], "fr": c["fr"], "dur": round(b0 - a0), "file": name, "start": round(a0, 2)})
         vmap[str(c["n"])] = [{"verse": n, "start": round(verses[n]["start"] - a0, 2)} for n in range(c["first"], c["last"] + 1)]
+        if str(c["n"]) in forced and vmap[str(c["n"])][0]["start"] < 0:
+            vmap[str(c["n"])][0]["start"] = 0.0
         assert vmap[str(c["n"])][0]["start"] >= 0, f"chapitre {c['n']} : premier vers avant le début du fichier"
     json.dump(meta, open(f"{a.out_dir}/chapters_meta.json", "w"), ensure_ascii=False, indent=1)
     json.dump(vmap, open(f"{a.out_dir}/verse_map.json", "w"), ensure_ascii=False)

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { Alert, Pressable, SectionList, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import type { Corpus } from "../data/corpora";
+import { displayName, type Corpus } from "../data/corpora";
 import type { Chapter } from "../data/chapters";
 import { cachedBytes, cancelDownloads, downloadMany, isRemote, removeChapters, useDownloadState } from "../lib/remoteCache";
 import { FONT, Theme } from "../theme";
@@ -168,12 +168,12 @@ export function DownloadsScreen({ t, corpora, onBack }: Props) {
               <View style={styles.sectionTitles}>
                 <Text style={[styles.sectionAr, { color: t.ink }]}>{s.corpus.ar}</Text>
                 <Text style={[styles.sectionFr, { color: t.muted }]}>
-                  {s.corpus.fr} · {plural(s.data.length, "chapitre", "chapitres")} · {tab === "have" ? "" : "≈ "}
+                  {displayName(s.corpus)} · {plural(s.data.length, "chapitre", "chapitres")} · {tab === "have" ? "" : "≈ "}
                   {fmtBytes(bytes)}
                 </Text>
               </View>
               {tab === "have" ? (
-                <Pressable onPress={() => remove(s.data, `Les ${s.data.length} chapitres téléchargés de « ${s.corpus.fr} » seront retirés du téléphone.`)} style={[styles.ghost, { borderColor: t.line }]}>
+                <Pressable onPress={() => remove(s.data, `Les ${s.data.length} chapitres téléchargés de « ${displayName(s.corpus)} » seront retirés du téléphone.`)} style={[styles.ghost, { borderColor: t.line }]}>
                   <Text style={[styles.ghostText, { color: t.danger }]}>Supprimer</Text>
                 </Pressable>
               ) : (
@@ -181,7 +181,7 @@ export function DownloadsScreen({ t, corpora, onBack }: Props) {
                   <Pressable onPress={() => toggleSection(s)} style={styles.link}>
                     <Text style={[styles.linkText, { color: t.accent }]}>{allSelected ? "Décocher" : "Tout cocher"}</Text>
                   </Pressable>
-                  <Pressable disabled={busy} onPress={() => start(s.data, bytes, `Télécharger « ${s.corpus.fr} »`)} style={[styles.ghost, { borderColor: t.accent, opacity: busy ? 0.4 : 1 }]}>
+                  <Pressable disabled={busy} onPress={() => start(s.data, bytes, `Télécharger « ${displayName(s.corpus)} »`)} style={[styles.ghost, { borderColor: t.accent, opacity: busy ? 0.4 : 1 }]}>
                     <Text style={[styles.ghostText, { color: t.accent }]}>Télécharger</Text>
                   </Pressable>
                 </View>
